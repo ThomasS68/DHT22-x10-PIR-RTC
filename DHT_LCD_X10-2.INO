@@ -10,14 +10,34 @@
      turn on the lamp for a short period when motion is detected and it's dark. 
      The scheduled lamp activation is delayed until it is dark. The time and date is 
      kept via a DS1307 RTC with battery backup.
+  
+     Connection Instructions:
+     Connect pin 1 (on the left) of the sensor to +5V
+     NOTE: If using a board with 3.3V logic like an Arduino Due connect pin 1
+     to 3.3V instead of 5V!
+     Connect pin 2 of the sensor to whatever your Arduino data pin is for the DHT
+     Connect pin 4 (on the right) of the sensor to GROUND
+     Connect a 10K resistor from pin 2 (data) to pin 1 (power) of the sensor
+     pin 1 = data, pin 2 = +5, pin 3 = gnd for my sensor (yours may be different!)
+     X10 connections:
+     Connection to power is through a PL513 interface. I cut the end off a standard 
+     RJ-11 phone cable and wired them to my breadboard. 
+                      (looking at PL513)
+       Yellow = data          (1) - connect to 10K pullup resistor -> +5v
+       Green  = ground        (2)
+       Red    = ground        (3)
+       Black  = zero crossing (4)
+     X10 Software: https://github.com/DougC/arduino-x10
+  
+     Parallax PIR sensor: 
+       Pin 1 = ground
+       Pin 2 = Vcc (+5v)
+       Pin 3 = Vout (0 or 1)
+  Includes:
+  DHT Sensor Library: https://github.com/adafruit/DHT-sensor-library
   */
-  // REQUIRES the following Arduino libraries:
-  // - DHT Sensor Library: https://github.com/adafruit/DHT-sensor-library
   #include <DHT.h>           //DHT sensor library
   #include <LiquidCrystal.h> // LCD display library
-//  #include "Wire.h"
-//  #include "TimeLib.h"
-//  #include "DS1307RTC.h"
   #include <RTClib.h>        // RTC library works well with DS1307
   #include <x10.h>
   #include <x10constants.h>
